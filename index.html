@@ -1174,9 +1174,19 @@
         }
 
         function nextQuestion() {
-            if (currentQuestion >= totalQuestions) {
-                checkForReview();  // 復習チェックを実行
-                return;
+            // 復習モードの場合は先にチェック
+            if (isReviewMode) {
+                if (reviewQuestions.length === 0) {
+                    // すべて正解したら終了
+                    showReviewComplete();
+                    return;
+                }
+            } else {
+                // 通常モードの場合は問題数をチェック
+                if (currentQuestion >= totalQuestions) {
+                    checkForReview();  // 復習チェックを実行
+                    return;
+                }
             }
 
             currentQuestion++;
@@ -1188,11 +1198,6 @@
 
             if (isReviewMode) {
                 // 復習モード：reviewQuestionsから出題
-                if (reviewQuestions.length === 0) {
-                    // すべて正解したら終了
-                    showReviewComplete();
-                    return;
-                }
                 const reviewIndex = Math.floor(Math.random() * reviewQuestions.length);
                 const katakana = reviewQuestions[reviewIndex];
                 questionData = katakanaData.find(item => item.katakana === katakana);
