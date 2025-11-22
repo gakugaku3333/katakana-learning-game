@@ -1247,15 +1247,16 @@
         }
 
         function checkAnswer(selected, button) {
-            const allButtons = document.querySelectorAll('.choice-btn');
-            allButtons.forEach(btn => btn.disabled = true);
-
             const feedback = document.getElementById('feedback');
 
             // 統計を更新
             gameData.totalAnswered++;
 
             if (selected === currentAnswer) {
+                // 正解時の処理
+                const allButtons = document.querySelectorAll('.choice-btn');
+                allButtons.forEach(btn => btn.disabled = true);
+
                 button.classList.add('correct');
                 feedback.textContent = '🎉 せいかい！すごい！';
                 feedback.className = 'feedback correct';
@@ -1280,9 +1281,22 @@
 
                 createConfetti();
                 playSound('correct');
+
+                // 正解したら2.5秒後に次の問題へ
+                setTimeout(() => {
+                    allButtons.forEach(btn => {
+                        btn.disabled = false;
+                        btn.classList.remove('correct', 'wrong');
+                    });
+                    nextQuestion();
+                }, 2500);
+
             } else {
+                // 不正解時の処理：正解するまで繰り返す
                 button.classList.add('wrong');
-                feedback.textContent = '😢 ざんねん！こたえは「' + currentAnswer + '」だよ';
+                button.disabled = true;  // この選択肢のみ無効化
+
+                feedback.textContent = '😢 ちがうよ！もういちど！';
                 feedback.className = 'feedback wrong';
                 playSound('wrong');
 
@@ -1290,17 +1304,15 @@
                 if (!isReviewMode && !currentSessionWrong.includes(currentKatakana)) {
                     currentSessionWrong.push(currentKatakana);
                 }
+
+                // 1秒後にフィードバックをクリア（問題は継続）
+                setTimeout(() => {
+                    feedback.textContent = '';
+                    feedback.className = 'feedback';
+                }, 1000);
             }
 
             saveGameData(gameData);
-
-            setTimeout(() => {
-                allButtons.forEach(btn => {
-                    btn.disabled = false;
-                    btn.classList.remove('correct', 'wrong');
-                });
-                nextQuestion();
-            }, 2500);
         }
 
         function createConfetti() {
@@ -2716,46 +2728,58 @@
 
         // 算数の答えチェック
         function checkMathAnswer(selected, button) {
-            const allButtons = document.querySelectorAll('#mathChoices .choice-btn');
-            allButtons.forEach(btn => btn.disabled = true);
-
             const feedback = document.getElementById('mathFeedback');
 
             gameData.totalAnswered++;
 
             if (selected === mathCorrectAnswer) {
+                // 正解時の処理
+                const allButtons = document.querySelectorAll('#mathChoices .choice-btn');
+                allButtons.forEach(btn => btn.disabled = true);
+
                 button.classList.add('correct');
                 feedback.textContent = '🎉 せいかい！すごい！';
                 feedback.className = 'feedback correct';
                 mathScore += 10;
                 document.getElementById('mathScore').textContent = mathScore;
 
+                // トークン獲得
                 const earnedTokens = 2;
                 mathTokensEarned += earnedTokens;
                 gameData.tokens += earnedTokens;
                 gameData.totalCorrect++;
-                document.getElementById('mathTokens').textContent = gameData.tokens;
                 updateTokenDisplay();
                 saveGameData(gameData);
 
                 createConfetti();
                 playSound('correct');
+
+                // 正解したら2.5秒後に次の問題へ
+                setTimeout(() => {
+                    allButtons.forEach(btn => {
+                        btn.disabled = false;
+                        btn.classList.remove('correct', 'wrong');
+                    });
+                    nextMathQuestion();
+                }, 2500);
+
             } else {
+                // 不正解時の処理：正解するまで繰り返す
                 button.classList.add('wrong');
-                feedback.textContent = '😢 ざんねん！こたえは「' + mathCorrectAnswer + '」だよ';
+                button.disabled = true;  // この選択肢のみ無効化
+
+                feedback.textContent = '😢 ちがうよ！もういちど！';
                 feedback.className = 'feedback wrong';
                 playSound('wrong');
+
+                // 1秒後にフィードバックをクリア（問題は継続）
+                setTimeout(() => {
+                    feedback.textContent = '';
+                    feedback.className = 'feedback';
+                }, 1000);
             }
 
             saveGameData(gameData);
-
-            setTimeout(() => {
-                allButtons.forEach(btn => {
-                    btn.disabled = false;
-                    btn.classList.remove('correct', 'wrong');
-                });
-                nextMathQuestion();
-            }, 2500);
         }
 
         // 算数結果表示
