@@ -707,6 +707,54 @@
             background: #667eea;
             color: white;
         }
+
+        /* 新ミニゲーム用スタイル */
+        .simon-btn {
+            aspect-ratio: 1;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: all 0.1s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .simon-btn.active {
+            opacity: 1;
+            transform: scale(0.95);
+            box-shadow: 0 0 20px currentColor;
+        }
+
+        .number-card {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.2s;
+            border: 3px solid #667eea;
+        }
+
+        .number-card:active {
+            transform: scale(0.9);
+        }
+
+        .dodge-rock {
+            position: absolute;
+            font-size: 30px;
+            text-align: center;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+        }
     </style>
 </head>
 
@@ -961,6 +1009,93 @@
             <button class="back-btn" onclick="endMiniGame()">もどる</button>
         </div>
 
+        <!-- うさぎジャンプゲーム -->
+        <div id="jumpGameScreen" class="hidden">
+            <h1>🐰 うさぎジャンプ</h1>
+            <div style="font-size: 24px; margin: 20px 0;">
+                スコア: <span id="jumpScore">0</span>
+            </div>
+            <div id="jumpField"
+                style="position: relative; height: 300px; max-width: 600px; margin: 30px auto; background: linear-gradient(to bottom, #87CEEB 0%, #90EE90 100%); border-radius: 20px; overflow: hidden; cursor: pointer;">
+                <div id="jumpRabbit" style="position: absolute; bottom: 20px; left: 50px; font-size: 40px;">🐰</div>
+            </div>
+            <p>画面をタップしてジャンプ！</p>
+            <button class="back-btn" onclick="endMiniGame()">やめる</button>
+        </div>
+
+        <!-- ひかるボタンゲーム -->
+        <div id="simonGameScreen" class="hidden">
+            <h1>🎹 ひかるボタン</h1>
+            <div style="font-size: 24px; margin: 20px 0;">
+                スコア: <span id="simonScore">0</span>
+            </div>
+            <div id="simonMessage" style="font-size: 20px; margin-bottom: 20px; height: 30px;">じゅんばんをおぼえてね！</div>
+            <div
+                style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 300px; margin: 0 auto;">
+                <button id="simonBtn0" class="simon-btn" style="background-color: #FF5252;"
+                    onclick="handleSimonInput(0)"></button>
+                <button id="simonBtn1" class="simon-btn" style="background-color: #448AFF;"
+                    onclick="handleSimonInput(1)"></button>
+                <button id="simonBtn2" class="simon-btn" style="background-color: #69F0AE;"
+                    onclick="handleSimonInput(2)"></button>
+                <button id="simonBtn3" class="simon-btn" style="background-color: #FFD740;"
+                    onclick="handleSimonInput(3)"></button>
+            </div>
+            <button class="back-btn" onclick="endMiniGame()" style="margin-top: 30px;">やめる</button>
+        </div>
+
+        <!-- すうじタッチゲーム -->
+        <div id="numbersGameScreen" class="hidden">
+            <h1>🔢 すうじタッチ</h1>
+            <div style="font-size: 24px; margin: 20px 0;">
+                つぎのすうじ: <span id="nextNumber">1</span> | タイム: <span id="numbersTime">0.0</span>びょう
+            </div>
+            <div id="numbersField"
+                style="position: relative; height: 400px; max-width: 600px; margin: 20px auto; background: #f0f0f0; border-radius: 20px; overflow: hidden;">
+            </div>
+            <button class="back-btn" onclick="endMiniGame()">やめる</button>
+        </div>
+
+        <!-- よけろ！ゲーム -->
+        <div id="dodgeGameScreen" class="hidden">
+            <h1>☄️ よけろ！</h1>
+            <div style="font-size: 24px; margin: 20px 0;">
+                タイム: <span id="dodgeTime">0.0</span>びょう
+            </div>
+            <div id="dodgeField"
+                style="position: relative; height: 400px; max-width: 600px; margin: 20px auto; background: #2c3e50; border-radius: 20px; overflow: hidden;">
+                <div id="dodgePlayer"
+                    style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); font-size: 40px; transition: left 0.1s;">
+                    🚀</div>
+            </div>
+            <div style="display: flex; justify-content: center; gap: 20px;">
+                <button class="tool-btn" onmousedown="startDodgeMove('left')" onmouseup="stopDodgeMove()"
+                    ontouchstart="startDodgeMove('left')" ontouchend="stopDodgeMove()">⬅️ ひだり</button>
+                <button class="tool-btn" onmousedown="startDodgeMove('right')" onmouseup="stopDodgeMove()"
+                    ontouchstart="startDodgeMove('right')" ontouchend="stopDodgeMove()">➡️ みぎ</button>
+            </div>
+            <button class="back-btn" onclick="endMiniGame()">やめる</button>
+        </div>
+
+        <!-- じゃんけんゲーム -->
+        <div id="rpsGameScreen" class="hidden">
+            <h1>✌️ じゃんけん</h1>
+            <div style="font-size: 24px; margin: 20px 0;">
+                かち: <span id="rpsWins">0</span> | あいこ: <span id="rpsDraws">0</span> | まけ: <span id="rpsLosses">0</span>
+            </div>
+            <div style="display: flex; justify-content: center; align-items: center; height: 200px; margin: 20px 0;">
+                <div id="rpsOpponent" style="font-size: 80px;">❓</div>
+            </div>
+            <div id="rpsResult"
+                style="font-size: 32px; font-weight: bold; height: 50px; margin-bottom: 20px; color: #ff5252;"></div>
+            <div style="display: flex; justify-content: center; gap: 20px;">
+                <button class="choice-btn" onclick="playRPS('rock')" style="font-size: 40px;">✊</button>
+                <button class="choice-btn" onclick="playRPS('scissors')" style="font-size: 40px;">✌️</button>
+                <button class="choice-btn" onclick="playRPS('paper')" style="font-size: 40px;">✋</button>
+            </div>
+            <button class="back-btn" onclick="endMiniGame()" style="margin-top: 30px;">やめる</button>
+        </div>
+
         <!-- 算数ゲーム選択画面 -->
         <div id="mathSelectScreen" class="hidden">
             <h1>🔢 さんすう</h1>
@@ -1112,6 +1247,11 @@
             { id: 'crown', name: 'おうかん', icon: '👑', price: 50, type: 'special' },
             { id: 'trophy', name: 'トロフィー', icon: '🏆', price: 40, type: 'special' },
             { id: 'game_mole', name: 'もぐらたたき', icon: '🔨', price: 10, type: 'game' },
+            { id: 'game_jump', name: 'うさぎジャンプ', icon: '🐰', price: 20, type: 'game' },
+            { id: 'game_simon', name: 'ひかるボタン', icon: '🎹', price: 25, type: 'game' },
+            { id: 'game_numbers', name: 'すうじタッチ', icon: '🔢', price: 20, type: 'game' },
+            { id: 'game_dodge', name: 'よけろ！', icon: '☄️', price: 25, type: 'game' },
+            { id: 'game_rps', name: 'じゃんけん', icon: '✌️', price: 15, type: 'game' },
             { id: 'game_balloon', name: 'ふうせんわり', icon: '🎈', price: 15, type: 'game' },
             { id: 'game_catch', name: 'フルーツキャッチ', icon: '🍎', price: 20, type: 'game' },
             { id: 'game_color', name: 'いろあわせ', icon: '🎨', price: 15, type: 'game' },
@@ -1678,6 +1818,26 @@
                     document.getElementById('drawGameScreen').classList.remove('hidden');
                     startDrawGame();
                     break;
+                case 'game_jump':
+                    document.getElementById('jumpGameScreen').classList.remove('hidden');
+                    startJumpGame();
+                    break;
+                case 'game_simon':
+                    document.getElementById('simonGameScreen').classList.remove('hidden');
+                    startSimonGame();
+                    break;
+                case 'game_numbers':
+                    document.getElementById('numbersGameScreen').classList.remove('hidden');
+                    startNumbersGame();
+                    break;
+                case 'game_dodge':
+                    document.getElementById('dodgeGameScreen').classList.remove('hidden');
+                    startDodgeGame();
+                    break;
+                case 'game_rps':
+                    document.getElementById('rpsGameScreen').classList.remove('hidden');
+                    startRPSGame();
+                    break;
             }
         }
 
@@ -1687,6 +1847,15 @@
                 clearInterval(miniGameTimer);
                 miniGameTimer = null;
             }
+
+            // 新ミニゲームのクリーンアップ
+            if (jumpInterval) clearInterval(jumpInterval);
+            if (jumpObstacleInterval) clearInterval(jumpObstacleInterval);
+            if (numbersInterval) clearInterval(numbersInterval);
+            if (dodgeInterval) clearInterval(dodgeInterval);
+            if (dodgeRockInterval) clearInterval(dodgeRockInterval);
+            if (dodgeMoveInterval) clearInterval(dodgeMoveInterval);
+
             currentMiniGame = null;
             showGames();
         }
@@ -2418,6 +2587,36 @@
         let currentColor = '#000000';
         let currentSize = 5;
 
+        // うさぎジャンプ
+        let jumpScore = 0;
+        let jumpInterval = null;
+        let jumpObstacleInterval = null;
+        let isJumping = false;
+
+        // ひかるボタン
+        let simonScore = 0;
+        let simonSequence = [];
+        let simonPlayerSequence = [];
+        let isSimonPlaying = false;
+
+        // すうじタッチ
+        let numbersScore = 0;
+        let nextNumber = 1;
+        let numbersTime = 0;
+        let numbersInterval = null;
+
+        // よけろ！
+        let dodgeTime = 0;
+        let dodgeInterval = null;
+        let dodgeRockInterval = null;
+        let dodgePlayerX = 50;
+        let dodgeMoveInterval = null;
+
+        // じゃんけん
+        let rpsWins = 0;
+        let rpsDraws = 0;
+        let rpsLosses = 0;
+
         function startDrawGame() {
             drawCanvas = document.getElementById('drawCanvas');
             drawCtx = drawCanvas.getContext('2d');
@@ -2482,6 +2681,372 @@
             });
         }
 
+        // うさぎジャンプゲーム
+        function startJumpGame() {
+            jumpScore = 0;
+            isJumping = false;
+            document.getElementById('jumpScore').textContent = jumpScore;
+
+            const field = document.getElementById('jumpField');
+            // 既存の障害物をクリア
+            const obstacles = field.querySelectorAll('.jump-obstacle');
+            obstacles.forEach(o => o.remove());
+
+            const rabbit = document.getElementById('jumpRabbit');
+            rabbit.style.bottom = '20px';
+
+            field.onclick = () => {
+                if (!isJumping) {
+                    isJumping = true;
+                    rabbit.style.transition = 'bottom 0.3s ease-out';
+                    rabbit.style.bottom = '150px';
+                    playSound('correct');
+
+                    setTimeout(() => {
+                        rabbit.style.transition = 'bottom 0.3s ease-in';
+                        rabbit.style.bottom = '20px';
+                        setTimeout(() => {
+                            isJumping = false;
+                        }, 300);
+                    }, 300);
+                }
+            };
+
+            // 障害物生成
+            jumpObstacleInterval = setInterval(() => {
+                const obstacle = document.createElement('div');
+                obstacle.className = 'jump-obstacle';
+                obstacle.textContent = '🌵';
+                obstacle.style.position = 'absolute';
+                obstacle.style.bottom = '20px';
+                obstacle.style.right = '-30px';
+                obstacle.style.fontSize = '30px';
+                obstacle.style.transition = 'right 2s linear';
+                field.appendChild(obstacle);
+
+                // アニメーション開始
+                setTimeout(() => {
+                    obstacle.style.right = '630px';
+                }, 50);
+
+                // 衝突判定とスコア加算
+                const checkCollision = setInterval(() => {
+                    const rabbitRect = rabbit.getBoundingClientRect();
+                    const obstacleRect = obstacle.getBoundingClientRect();
+
+                    // 衝突チェック
+                    if (rabbitRect.right > obstacleRect.left + 10 &&
+                        rabbitRect.left < obstacleRect.right - 10 &&
+                        rabbitRect.bottom > obstacleRect.top + 10) {
+                        clearInterval(checkCollision);
+                        showGameResult('うさぎジャンプ', jumpScore);
+                        clearInterval(jumpObstacleInterval);
+                    }
+
+                    // 通過チェック
+                    if (obstacleRect.right < rabbitRect.left && !obstacle.passed) {
+                        obstacle.passed = true;
+                        jumpScore++;
+                        document.getElementById('jumpScore').textContent = jumpScore;
+                    }
+                }, 50);
+
+                // 画面外に出たら削除
+                setTimeout(() => {
+                    clearInterval(checkCollision);
+                    if (obstacle.parentNode) obstacle.remove();
+                }, 2000);
+
+            }, 1500);
+        }
+
+        // ひかるボタンゲーム
+        function startSimonGame() {
+            simonScore = 0;
+            simonSequence = [];
+            simonPlayerSequence = [];
+            isSimonPlaying = false;
+            document.getElementById('simonScore').textContent = simonScore;
+            document.getElementById('simonMessage').textContent = 'じゅんばんをおぼえてね！';
+
+            setTimeout(nextSimonRound, 1000);
+        }
+
+        function nextSimonRound() {
+            simonPlayerSequence = [];
+            simonSequence.push(Math.floor(Math.random() * 4));
+            playSimonSequence();
+        }
+
+        function playSimonSequence() {
+            isSimonPlaying = true;
+            document.getElementById('simonMessage').textContent = 'じゅんばんをおぼえてね！';
+
+            let i = 0;
+            const interval = setInterval(() => {
+                if (i >= simonSequence.length) {
+                    clearInterval(interval);
+                    isSimonPlaying = false;
+                    document.getElementById('simonMessage').textContent = 'あなたのばんだよ！';
+                    return;
+                }
+
+                const btnIndex = simonSequence[i];
+                const btn = document.getElementById(`simonBtn${btnIndex}`);
+                btn.classList.add('active');
+                playSound('correct');
+
+                setTimeout(() => {
+                    btn.classList.remove('active');
+                }, 300);
+
+                i++;
+            }, 600);
+        }
+
+        function handleSimonInput(index) {
+            if (isSimonPlaying) return;
+
+            const btn = document.getElementById(`simonBtn${index}`);
+            btn.classList.add('active');
+            playSound('correct');
+            setTimeout(() => btn.classList.remove('active'), 200);
+
+            simonPlayerSequence.push(index);
+
+            // 正誤判定
+            if (simonPlayerSequence[simonPlayerSequence.length - 1] !== simonSequence[simonPlayerSequence.length - 1]) {
+                document.getElementById('simonMessage').textContent = 'ざんねん...';
+                playSound('wrong');
+                setTimeout(() => {
+                    showGameResult('ひかるボタン', simonScore);
+                }, 1000);
+                return;
+            }
+
+            // ラウンドクリア判定
+            if (simonPlayerSequence.length === simonSequence.length) {
+                simonScore++;
+                document.getElementById('simonScore').textContent = simonScore;
+                document.getElementById('simonMessage').textContent = 'せいかい！';
+                createConfetti();
+                isSimonPlaying = true;
+                setTimeout(nextSimonRound, 1000);
+            }
+        }
+
+        // すうじタッチゲーム
+        function startNumbersGame() {
+            numbersScore = 0;
+            nextNumber = 1;
+            numbersTime = 0;
+            document.getElementById('nextNumber').textContent = nextNumber;
+            document.getElementById('numbersTime').textContent = '0.0';
+
+            const field = document.getElementById('numbersField');
+            field.innerHTML = '';
+
+            // 1から10までの数字を配置
+            const positions = [];
+            for (let i = 1; i <= 10; i++) {
+                const card = document.createElement('div');
+                card.className = 'number-card';
+                card.textContent = i;
+
+                // 重ならないように配置（簡易的）
+                let left, top, overlap;
+                do {
+                    overlap = false;
+                    left = Math.random() * (field.clientWidth - 60);
+                    top = Math.random() * (field.clientHeight - 60);
+
+                    for (const pos of positions) {
+                        const dx = left - pos.left;
+                        const dy = top - pos.top;
+                        if (Math.sqrt(dx * dx + dy * dy) < 70) {
+                            overlap = true;
+                            break;
+                        }
+                    }
+                } while (overlap && positions.length < 50); // 無限ループ防止
+
+                positions.push({ left, top });
+                card.style.left = left + 'px';
+                card.style.top = top + 'px';
+
+                card.onclick = () => {
+                    if (parseInt(card.textContent) === nextNumber) {
+                        card.style.background = '#43e97b';
+                        card.style.color = 'white';
+                        playSound('correct');
+                        nextNumber++;
+
+                        if (nextNumber > 10) {
+                            clearInterval(numbersInterval);
+                            createConfetti();
+                            // スコア計算: タイムが早いほど高得点（基準30秒）
+                            const timeScore = Math.max(0, Math.floor((30 - numbersTime) * 10));
+                            showGameResult('すうじタッチ', timeScore);
+                        } else {
+                            document.getElementById('nextNumber').textContent = nextNumber;
+                        }
+                    } else {
+                        playSound('wrong');
+                    }
+                };
+
+                field.appendChild(card);
+            }
+
+            // タイマー開始
+            const startTime = Date.now();
+            numbersInterval = setInterval(() => {
+                numbersTime = (Date.now() - startTime) / 1000;
+                document.getElementById('numbersTime').textContent = numbersTime.toFixed(1);
+            }, 100);
+        }
+
+        // よけろ！ゲーム
+        function startDodgeGame() {
+            dodgeTime = 0;
+            dodgePlayerX = 50;
+            document.getElementById('dodgeTime').textContent = '0.0';
+
+            const player = document.getElementById('dodgePlayer');
+            player.style.left = '50%';
+
+            const field = document.getElementById('dodgeField');
+            // 既存の岩をクリア
+            const rocks = field.querySelectorAll('.dodge-rock');
+            rocks.forEach(r => r.remove());
+
+            // タイマー
+            const startTime = Date.now();
+            dodgeInterval = setInterval(() => {
+                dodgeTime = (Date.now() - startTime) / 1000;
+                document.getElementById('dodgeTime').textContent = dodgeTime.toFixed(1);
+            }, 100);
+
+            // 岩生成
+            dodgeRockInterval = setInterval(() => {
+                const rock = document.createElement('div');
+                rock.className = 'dodge-rock';
+                rock.textContent = '☄️';
+                rock.style.left = Math.random() * (field.clientWidth - 40) + 'px';
+                rock.style.top = '-40px';
+                field.appendChild(rock);
+
+                // 落下アニメーション
+                let rockTop = -40;
+                const fallSpeed = 3 + Math.random() * 3 + (dodgeTime / 10); // 時間経過で速くなる
+
+                const fall = setInterval(() => {
+                    rockTop += fallSpeed;
+                    rock.style.top = rockTop + 'px';
+
+                    // 衝突判定
+                    const playerRect = player.getBoundingClientRect();
+                    const rockRect = rock.getBoundingClientRect();
+
+                    if (rockRect.bottom > playerRect.top + 10 &&
+                        rockRect.top < playerRect.bottom - 10 &&
+                        rockRect.right > playerRect.left + 10 &&
+                        rockRect.left < playerRect.right - 10) {
+
+                        clearInterval(fall);
+                        clearInterval(dodgeInterval);
+                        clearInterval(dodgeRockInterval);
+                        if (dodgeMoveInterval) clearInterval(dodgeMoveInterval);
+                        playSound('wrong');
+                        showGameResult('よけろ！', Math.floor(dodgeTime * 10));
+                    }
+
+                    // 画面外
+                    if (rockTop > field.clientHeight) {
+                        clearInterval(fall);
+                        if (rock.parentNode) rock.remove();
+                    }
+                }, 20);
+
+            }, 800);
+        }
+
+        function startDodgeMove(direction) {
+            if (dodgeMoveInterval) clearInterval(dodgeMoveInterval);
+
+            const player = document.getElementById('dodgePlayer');
+            const step = direction === 'left' ? -2 : 2;
+
+            dodgeMoveInterval = setInterval(() => {
+                dodgePlayerX += step;
+                if (dodgePlayerX < 5) dodgePlayerX = 5;
+                if (dodgePlayerX > 95) dodgePlayerX = 95;
+                player.style.left = dodgePlayerX + '%';
+            }, 10);
+        }
+
+        function stopDodgeMove() {
+            if (dodgeMoveInterval) clearInterval(dodgeMoveInterval);
+        }
+
+        // じゃんけんゲーム
+        function startRPSGame() {
+            rpsWins = 0;
+            rpsDraws = 0;
+            rpsLosses = 0;
+            updateRPSStats();
+            document.getElementById('rpsResult').textContent = '';
+            document.getElementById('rpsOpponent').textContent = '❓';
+        }
+
+        function updateRPSStats() {
+            document.getElementById('rpsWins').textContent = rpsWins;
+            document.getElementById('rpsDraws').textContent = rpsDraws;
+            document.getElementById('rpsLosses').textContent = rpsLosses;
+        }
+
+        function playRPS(playerChoice) {
+            const choices = ['rock', 'scissors', 'paper'];
+            const emojis = { rock: '✊', scissors: '✌️', paper: '✋' };
+            const opponentChoice = choices[Math.floor(Math.random() * 3)];
+
+            const opponentEl = document.getElementById('rpsOpponent');
+            opponentEl.textContent = emojis[opponentChoice];
+
+            let result = '';
+            if (playerChoice === opponentChoice) {
+                result = 'draw';
+                rpsDraws++;
+                document.getElementById('rpsResult').textContent = 'あいこ！';
+                document.getElementById('rpsResult').style.color = '#ffa500';
+            } else if (
+                (playerChoice === 'rock' && opponentChoice === 'scissors') ||
+                (playerChoice === 'scissors' && opponentChoice === 'paper') ||
+                (playerChoice === 'paper' && opponentChoice === 'rock')
+            ) {
+                result = 'win';
+                rpsWins++;
+                document.getElementById('rpsResult').textContent = 'かち！';
+                document.getElementById('rpsResult').style.color = '#10b981';
+                playSound('correct');
+                createConfetti();
+            } else {
+                result = 'loss';
+                rpsLosses++;
+                document.getElementById('rpsResult').textContent = 'まけ...';
+                document.getElementById('rpsResult').style.color = '#ef4444';
+                playSound('wrong');
+            }
+
+            updateRPSStats();
+
+            // 3回勝ったらクリア（または適当な終了条件）
+            if (rpsWins >= 5) {
+                setTimeout(() => {
+                    showGameResult('じゃんけん', rpsWins * 10);
+                }, 1000);
+            }
+        }
         function startDraw(e) {
             isDrawing = true;
             const rect = drawCanvas.getBoundingClientRect();
