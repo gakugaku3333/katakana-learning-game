@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -68,8 +69,15 @@
         }
 
         @keyframes tokenPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
         }
 
         .shop-btn {
@@ -207,6 +215,7 @@
             from {
                 transform: translate(-50%, -50%) scale(0);
             }
+
             to {
                 transform: translate(-50%, -50%) scale(1);
             }
@@ -227,8 +236,15 @@
         }
 
         @keyframes bounce {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
         }
 
         .question {
@@ -280,14 +296,31 @@
         }
 
         @keyframes correctAnimation {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
         }
 
         @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-10px);
+            }
+
+            75% {
+                transform: translateX(10px);
+            }
         }
 
         .feedback {
@@ -307,9 +340,19 @@
         }
 
         @keyframes celebrate {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-10deg); }
-            75% { transform: rotate(10deg); }
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            25% {
+                transform: rotate(-10deg);
+            }
+
+            75% {
+                transform: rotate(10deg);
+            }
         }
 
         .confetti {
@@ -383,7 +426,7 @@
             cursor: pointer;
             font-size: 60px;
             transition: all 0.2s ease;
-            box-shadow: inset 0 10px 20px rgba(0,0,0,0.3);
+            box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.3);
         }
 
         .mole-hole:hover {
@@ -406,6 +449,7 @@
             from {
                 bottom: -60px;
             }
+
             to {
                 bottom: 100%;
             }
@@ -422,6 +466,7 @@
             from {
                 top: -50px;
             }
+
             to {
                 top: 100%;
             }
@@ -455,7 +500,7 @@
             font-size: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .memory-card:hover {
@@ -507,7 +552,7 @@
             justify-content: center;
             cursor: pointer;
             transition: all 0.1s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             user-select: none;
         }
 
@@ -524,8 +569,15 @@
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
         }
 
         .bubble-item {
@@ -541,10 +593,23 @@
         }
 
         @keyframes bubbleFloat {
-            0%, 100% { transform: translate(0, 0); }
-            25% { transform: translate(10px, -10px); }
-            50% { transform: translate(-10px, -20px); }
-            75% { transform: translate(-15px, -10px); }
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            25% {
+                transform: translate(10px, -10px);
+            }
+
+            50% {
+                transform: translate(-10px, -20px);
+            }
+
+            75% {
+                transform: translate(-15px, -10px);
+            }
         }
 
         .match3-grid {
@@ -565,7 +630,7 @@
             font-size: 40px;
             cursor: pointer;
             transition: all 0.2s ease;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
         }
 
         .match3-cell:hover {
@@ -582,8 +647,15 @@
         }
 
         @keyframes matchPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.3); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.3);
+            }
         }
 
         .drawing-canvas {
@@ -591,7 +663,7 @@
             border-radius: 15px;
             background: white;
             cursor: crosshair;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
         }
 
         .color-palette {
@@ -637,6 +709,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <!-- スタート画面 -->
@@ -654,11 +727,15 @@
                 <small style="font-size: 18px;">せいかいすると⭐トークンがもらえるよ！</small>
             </p>
             <button class="start-btn" onclick="startGame()">カタカナクイズ</button>
-            <button class="start-btn" onclick="showMathSelect()" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">さんすう</button>
-            
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; max-width: 600px; margin: 20px auto;">
-                <button class="shop-btn" onclick="window.location.href='lowercase-typing.html'" style="background: linear-gradient(135deg, #ffa500 0%, #ff6347 100%);">⌨️ 小文字タイピング</button>
-                <button class="shop-btn" onclick="window.location.href='uppercase-typing.html'" style="background: linear-gradient(135deg, #ff6347 0%, #ff1493 100%);">⌨️ 大文字タイピング</button>
+            <button class="start-btn" onclick="showMathSelect()"
+                style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">さんすう</button>
+
+            <div
+                style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; max-width: 600px; margin: 20px auto;">
+                <button class="shop-btn" onclick="window.location.href='lowercase-typing.html'"
+                    style="background: linear-gradient(135deg, #ffa500 0%, #ff6347 100%);">⌨️ 小文字タイピング</button>
+                <button class="shop-btn" onclick="window.location.href='uppercase-typing.html'"
+                    style="background: linear-gradient(135deg, #ff6347 0%, #ff1493 100%);">⌨️ 大文字タイピング</button>
             </div>
 
             <button class="shop-btn" onclick="showGames()">🎮 ゲーム</button>
@@ -705,6 +782,18 @@
             <button class="start-btn" onclick="location.reload()">もういちど！</button>
         </div>
 
+        <!-- 復習開始画面 -->
+        <div id="reviewStartScreen" class="hidden">
+            <h1>📚 ふくしゅうタイム！</h1>
+            <div class="emoji">💪✨📝</div>
+            <p class="intro-text">
+                まちがえた <span id="reviewCount" style="color: #f5576c; font-weight: bold;"></span> もんだいを<br>
+                ふくしゅうしよう！<br>
+                <small style="font-size: 20px;">できるまでがんばろう！💕</small>
+            </p>
+            <button class="start-btn" onclick="startReviewMode()">ふくしゅうスタート！</button>
+        </div>
+
         <!-- ショップ画面 -->
         <div id="shopScreen" class="hidden shop-screen">
             <h1>🛍️ トークンショップ</h1>
@@ -749,7 +838,9 @@
             <div style="font-size: 24px; margin: 20px 0;">
                 スコア: <span id="moleScore">0</span> | じかん: <span id="moleTime">30</span>びょう
             </div>
-            <div id="moleField" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 600px; margin: 30px auto;"></div>
+            <div id="moleField"
+                style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 600px; margin: 30px auto;">
+            </div>
             <button class="back-btn" onclick="endMiniGame()">やめる</button>
         </div>
 
@@ -759,7 +850,9 @@
             <div style="font-size: 24px; margin: 20px 0;">
                 スコア: <span id="balloonScore">0</span> | じかん: <span id="balloonTime">30</span>びょう
             </div>
-            <div id="balloonField" style="position: relative; height: 500px; max-width: 600px; margin: 30px auto; background: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 100%); border-radius: 20px; overflow: hidden;"></div>
+            <div id="balloonField"
+                style="position: relative; height: 500px; max-width: 600px; margin: 30px auto; background: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 100%); border-radius: 20px; overflow: hidden;">
+            </div>
             <button class="back-btn" onclick="endMiniGame()">やめる</button>
         </div>
 
@@ -769,8 +862,11 @@
             <div style="font-size: 24px; margin: 20px 0;">
                 スコア: <span id="catchScore">0</span> | じかん: <span id="catchTime">30</span>びょう
             </div>
-            <div id="catchField" style="position: relative; height: 500px; max-width: 600px; margin: 30px auto; background: linear-gradient(to bottom, #FFE5B4 0%, #FFF8DC 100%); border-radius: 20px; overflow: hidden;">
-                <div id="basket" style="position: absolute; bottom: 10px; width: 80px; height: 60px; font-size: 50px; left: 50%; transform: translateX(-50%);">🧺</div>
+            <div id="catchField"
+                style="position: relative; height: 500px; max-width: 600px; margin: 30px auto; background: linear-gradient(to bottom, #FFE5B4 0%, #FFF8DC 100%); border-radius: 20px; overflow: hidden;">
+                <div id="basket"
+                    style="position: absolute; bottom: 10px; width: 80px; height: 60px; font-size: 50px; left: 50%; transform: translateX(-50%);">
+                    🧺</div>
             </div>
             <button class="back-btn" onclick="endMiniGame()">やめる</button>
         </div>
@@ -782,8 +878,12 @@
                 スコア: <span id="colorScore">0</span> | もんだい: <span id="colorQuestion">1</span>/10
             </div>
             <div style="font-size: 32px; margin: 30px 0;">このいろは？</div>
-            <div id="colorBox" style="width: 200px; height: 200px; margin: 30px auto; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);"></div>
-            <div id="colorChoices" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; max-width: 600px; margin: 30px auto;"></div>
+            <div id="colorBox"
+                style="width: 200px; height: 200px; margin: 30px auto; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+            </div>
+            <div id="colorChoices"
+                style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; max-width: 600px; margin: 30px auto;">
+            </div>
             <button class="back-btn" onclick="endMiniGame()">やめる</button>
         </div>
 
@@ -793,7 +893,9 @@
             <div style="font-size: 24px; margin: 20px 0;">
                 スコア: <span id="memoryScore">0</span> | のこり: <span id="memoryRemaining">8</span>ペア
             </div>
-            <div id="memoryField" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; max-width: 600px; margin: 30px auto;"></div>
+            <div id="memoryField"
+                style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; max-width: 600px; margin: 30px auto;">
+            </div>
             <button class="back-btn" onclick="endMiniGame()">やめる</button>
         </div>
 
@@ -815,7 +917,9 @@
             <div style="font-size: 24px; margin: 20px 0;">
                 スコア: <span id="starScore">0</span> | じかん: <span id="starTime">30</span>びょう
             </div>
-            <div id="starField" style="position: relative; height: 500px; max-width: 600px; margin: 30px auto; background: linear-gradient(to bottom, #1a1a2e 0%, #16213e 100%); border-radius: 20px; overflow: hidden;"></div>
+            <div id="starField"
+                style="position: relative; height: 500px; max-width: 600px; margin: 30px auto; background: linear-gradient(to bottom, #1a1a2e 0%, #16213e 100%); border-radius: 20px; overflow: hidden;">
+            </div>
             <button class="back-btn" onclick="endMiniGame()">やめる</button>
         </div>
 
@@ -825,7 +929,9 @@
             <div style="font-size: 24px; margin: 20px 0;">
                 スコア: <span id="bubbleScore">0</span> | じかん: <span id="bubbleTime">30</span>びょう
             </div>
-            <div id="bubbleField" style="position: relative; height: 500px; max-width: 600px; margin: 30px auto; background: linear-gradient(to bottom, #E0F7FA 0%, #B2EBF2 100%); border-radius: 20px; overflow: hidden;"></div>
+            <div id="bubbleField"
+                style="position: relative; height: 500px; max-width: 600px; margin: 30px auto; background: linear-gradient(to bottom, #E0F7FA 0%, #B2EBF2 100%); border-radius: 20px; overflow: hidden;">
+            </div>
             <button class="back-btn" onclick="endMiniGame()">やめる</button>
         </div>
 
@@ -863,10 +969,13 @@
                 どのけいさんをべんきょうする？<br>
                 <small style="font-size: 18px;">せいかいすると⭐トークンがもらえるよ！</small>
             </p>
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 600px; margin: 30px auto;">
+            <div
+                style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 600px; margin: 30px auto;">
                 <button class="start-btn" onclick="showMathLevel('addition')" style="font-size: 32px;">➕ たしざん</button>
-                <button class="start-btn" onclick="showMathLevel('subtraction')" style="font-size: 32px;">➖ ひきざん</button>
-                <button class="start-btn" onclick="showMathLevel('multiplication')" style="font-size: 32px;">✖️ かけざん</button>
+                <button class="start-btn" onclick="showMathLevel('subtraction')" style="font-size: 32px;">➖
+                    ひきざん</button>
+                <button class="start-btn" onclick="showMathLevel('multiplication')" style="font-size: 32px;">✖️
+                    かけざん</button>
                 <button class="start-btn" onclick="showMathLevel('division')" style="font-size: 32px;">➗ わりざん</button>
             </div>
             <button class="back-btn" onclick="backToStart()">もどる</button>
@@ -875,7 +984,8 @@
         <!-- 算数レベル選択画面 -->
         <div id="mathLevelScreen" class="hidden">
             <h1 id="mathLevelTitle">レベルをえらぶ</h1>
-            <div id="mathLevelButtons" style="display: flex; flex-direction: column; gap: 15px; max-width: 500px; margin: 30px auto;"></div>
+            <div id="mathLevelButtons"
+                style="display: flex; flex-direction: column; gap: 15px; max-width: 500px; margin: 30px auto;"></div>
             <button class="back-btn" onclick="showMathSelect()">もどる</button>
         </div>
 
@@ -895,7 +1005,8 @@
                 </div>
             </div>
 
-            <div style="font-size: 80px; font-weight: bold; color: #43e97b; margin: 40px 0; text-shadow: 3px 3px 6px rgba(67, 233, 123, 0.3);" id="mathProblem"></div>
+            <div style="font-size: 80px; font-weight: bold; color: #43e97b; margin: 40px 0; text-shadow: 3px 3px 6px rgba(67, 233, 123, 0.3);"
+                id="mathProblem"></div>
 
             <div class="question">こたえは？</div>
 
@@ -978,6 +1089,12 @@
         let usedQuestions = [];
         let tokensEarned = 0;
 
+        // 復習モード用の変数
+        let currentSessionWrong = [];  // 今回のセッションで間違えた問題
+        let isReviewMode = false;      // 復習モードフラグ
+        let reviewQuestions = [];      // 復習対象の問題リスト
+        let currentKatakana = '';      // 現在の問題のカタカナ
+
         // ゲームデータの保存・読み込み
         const STORAGE_KEY = 'katakana_game_data';
 
@@ -1050,13 +1167,15 @@
             currentQuestion = 0;
             usedQuestions = [];
             tokensEarned = 0;
+            currentSessionWrong = [];  // 今回のセッションで間違えた問題をリセット
+            isReviewMode = false;       // 通常モードでスタート
             updateTokenDisplay();
             nextQuestion();
         }
 
         function nextQuestion() {
             if (currentQuestion >= totalQuestions) {
-                showResult();
+                checkForReview();  // 復習チェックを実行
                 return;
             }
 
@@ -1065,13 +1184,29 @@
             document.getElementById('feedback').textContent = '';
             document.getElementById('feedback').className = 'feedback';
 
-            // ランダムな問題を選択（重複なし）
             let questionData;
-            do {
-                questionData = katakanaData[Math.floor(Math.random() * katakanaData.length)];
-            } while (usedQuestions.includes(questionData.katakana));
 
-            usedQuestions.push(questionData.katakana);
+            if (isReviewMode) {
+                // 復習モード：reviewQuestionsから出題
+                if (reviewQuestions.length === 0) {
+                    // すべて正解したら終了
+                    showReviewComplete();
+                    return;
+                }
+                const reviewIndex = Math.floor(Math.random() * reviewQuestions.length);
+                const katakana = reviewQuestions[reviewIndex];
+                questionData = katakanaData.find(item => item.katakana === katakana);
+                currentKatakana = katakana;
+            } else {
+                // 通常モード：ランダムな問題を選択（重複なし）
+                do {
+                    questionData = katakanaData[Math.floor(Math.random() * katakanaData.length)];
+                } while (usedQuestions.includes(questionData.katakana));
+
+                usedQuestions.push(questionData.katakana);
+                currentKatakana = questionData.katakana;
+            }
+
             currentAnswer = questionData.hiragana;
 
             // カタカナを表示
@@ -1135,6 +1270,14 @@
                 updateTokenDisplay();
                 saveGameData(gameData);
 
+                // 復習モードで正解したらリストから削除
+                if (isReviewMode) {
+                    const index = reviewQuestions.indexOf(currentKatakana);
+                    if (index > -1) {
+                        reviewQuestions.splice(index, 1);
+                    }
+                }
+
                 createConfetti();
                 playSound('correct');
             } else {
@@ -1142,6 +1285,11 @@
                 feedback.textContent = '😢 ざんねん！こたえは「' + currentAnswer + '」だよ';
                 feedback.className = 'feedback wrong';
                 playSound('wrong');
+
+                // 通常モードで不正解：間違いリストに追加
+                if (!isReviewMode && !currentSessionWrong.includes(currentKatakana)) {
+                    currentSessionWrong.push(currentKatakana);
+                }
             }
 
             saveGameData(gameData);
@@ -1221,6 +1369,66 @@
                 resultEmoji.textContent = '💪😊';
                 resultMessage.textContent = 'もういちどちょうせんしてみよう！';
             }
+        }
+
+        // 復習チェック関数
+        function checkForReview() {
+            if (currentSessionWrong.length > 0) {
+                // 間違いがあれば復習開始画面へ
+                showReviewStartScreen();
+            } else {
+                // 間違いがなければ通常の結果画面へ
+                showResult();
+            }
+        }
+
+        // 復習開始画面を表示
+        function showReviewStartScreen() {
+            hideAllScreens();
+            document.getElementById('reviewStartScreen').classList.remove('hidden');
+            document.getElementById('reviewCount').textContent = currentSessionWrong.length;
+        }
+
+        // 復習モードを開始
+        function startReviewMode() {
+            hideAllScreens();
+            document.getElementById('gameScreen').classList.remove('hidden');
+
+            // 復習モードの設定
+            isReviewMode = true;
+            reviewQuestions = [...currentSessionWrong];  // 間違えた問題のコピー
+            currentQuestion = 0;
+            totalQuestions = reviewQuestions.length;
+
+            // UI更新
+            document.getElementById('questionNum').textContent = '1';
+
+            nextQuestion();
+        }
+
+        // 復習完了画面
+        function showReviewComplete() {
+            hideAllScreens();
+
+            // 完了ポップアップを表示
+            const popup = document.createElement('div');
+            popup.className = 'reward-popup';
+            popup.innerHTML = `
+                <h2 style="color: #10b981; margin-bottom: 20px;">🎉 ふくしゅうかんりょう！</h2>
+                <div class="reward-icon-large">✨🏆✨</div>
+                <div style="font-size: 32px; font-weight: bold; margin: 20px 0; color: #333;">
+                    ぜんぶできたね！<br>すごい！
+                </div>
+            `;
+
+            document.body.appendChild(popup);
+            createConfetti();
+            playSound('correct');
+
+            setTimeout(() => {
+                popup.remove();
+                showResult();  // 最終結果画面へ
+            }, 3000);
         }
 
         // ショップ画面を表示
@@ -1412,7 +1620,7 @@
             currentMiniGame = gameId;
             hideAllScreens();
 
-            switch(gameId) {
+            switch (gameId) {
                 case 'game_mole':
                     document.getElementById('moleGameScreen').classList.remove('hidden');
                     startMoleGame();
@@ -2124,7 +2332,7 @@
             const col2 = idx2 % 6;
 
             return (Math.abs(row1 - row2) === 1 && col1 === col2) ||
-                   (Math.abs(col1 - col2) === 1 && row1 === row2);
+                (Math.abs(col1 - col2) === 1 && row1 === row2);
         }
 
         function swapMatch3(idx1, idx2) {
@@ -2283,7 +2491,7 @@
         }
 
         function changeDrawSize(size) {
-            switch(size) {
+            switch (size) {
                 case 'small': currentSize = 2; break;
                 case 'medium': currentSize = 5; break;
                 case 'large': currentSize = 10; break;
@@ -2493,7 +2701,7 @@
         function createMathChoices(correctAnswer, type, level) {
             const choices = [correctAnswer];
             const range = type === 'addition' && level >= 2 ? 20 :
-                         type === 'multiplication' && level === 3 ? 30 : 10;
+                type === 'multiplication' && level === 3 ? 30 : 10;
 
             while (choices.length < 4) {
                 const offset = Math.floor(Math.random() * range) - Math.floor(range / 2);
@@ -2577,4 +2785,5 @@
         }
     </script>
 </body>
+
 </html>
