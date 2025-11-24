@@ -241,6 +241,65 @@
             margin: 10px 0;
             animation: pulse 0.5s ease infinite;
         }
+
+        .visual-keyboard {
+            margin: 30px auto;
+            max-width: 600px;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .visual-keyboard.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .keyboard-row {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .key {
+            min-width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .key.highlight {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            border-color: #f59e0b;
+            color: #000;
+            transform: scale(1.15);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: keyPulse 1s ease-in-out infinite;
+        }
+
+        @keyframes keyPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 5px 15px rgba(0, 0, 0, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 0 30px rgba(255, 215, 0, 0.9), 0 8px 20px rgba(0, 0, 0, 0.3);
+            }
+        }
     </style>
 </head>
 
@@ -294,6 +353,41 @@
             <div class="keyboard-hint">
                 💡 キーボードでもじをうってね！
             </div>
+
+            <div class="visual-keyboard hidden" id="visualKeyboard">
+                <div class="keyboard-row">
+                    <div class="key" data-key="q">Q</div>
+                    <div class="key" data-key="w">W</div>
+                    <div class="key" data-key="e">E</div>
+                    <div class="key" data-key="r">R</div>
+                    <div class="key" data-key="t">T</div>
+                    <div class="key" data-key="y">Y</div>
+                    <div class="key" data-key="u">U</div>
+                    <div class="key" data-key="i">I</div>
+                    <div class="key" data-key="o">O</div>
+                    <div class="key" data-key="p">P</div>
+                </div>
+                <div class="keyboard-row">
+                    <div class="key" data-key="a">A</div>
+                    <div class="key" data-key="s">S</div>
+                    <div class="key" data-key="d">D</div>
+                    <div class="key" data-key="f">F</div>
+                    <div class="key" data-key="g">G</div>
+                    <div class="key" data-key="h">H</div>
+                    <div class="key" data-key="j">J</div>
+                    <div class="key" data-key="k">K</div>
+                    <div class="key" data-key="l">L</div>
+                </div>
+                <div class="keyboard-row">
+                    <div class="key" data-key="z">Z</div>
+                    <div class="key" data-key="x">X</div>
+                    <div class="key" data-key="c">C</div>
+                    <div class="key" data-key="v">V</div>
+                    <div class="key" data-key="b">B</div>
+                    <div class="key" data-key="n">N</div>
+                    <div class="key" data-key="m">M</div>
+                </div>
+            </div>
         </div>
 
         <!-- 結果画面 -->
@@ -329,6 +423,7 @@
         let timeLeft = 60;
         let comboCount = 0;
         let gameActive = false;
+        let hintTimer = null;
 
         // アルファベット配列（小文字）
         const letters = 'abcdefghijklmnopqrstuvwxyz'.split('');
@@ -370,6 +465,43 @@
             // フィードバックをクリア
             document.getElementById('feedback').textContent = '';
             document.getElementById('feedback').className = 'feedback';
+
+            // ヒントをリセット
+            const hintEl = document.querySelector('.keyboard-hint');
+            hintEl.textContent = '💡 キーボードでもじをうってね！';
+            hintEl.style.backgroundColor = '#f0f0f0';
+            hintEl.style.color = '#666';
+
+            // キーボードを非表示にしてハイライトをリセット
+            const visualKeyboard = document.getElementById('visualKeyboard');
+            visualKeyboard.classList.remove('show');
+            visualKeyboard.classList.add('hidden');
+            document.querySelectorAll('.key').forEach(key => {
+                key.classList.remove('highlight');
+            });
+
+            // ヒントタイマーを開始
+            if (hintTimer) clearTimeout(hintTimer);
+            hintTimer = setTimeout(() => {
+                if (gameActive) {
+                    hintEl.innerHTML = `💡 ヒント: キーボードの<strong>「${currentLetter.toUpperCase()}」</strong>をおしてね！`;
+                    hintEl.style.backgroundColor = '#fff3cd';
+                    hintEl.style.color = '#856404';
+
+                    // ビジュアルキーボードを表示してハイライト
+                    visualKeyboard.classList.remove('hidden');
+                    setTimeout(() => {
+                        visualKeyboard.classList.add('show');
+                    }, 10);
+
+                    const targetKey = document.querySelector(`.key[data-key="${currentLetter}"]`);
+                    if (targetKey) {
+                        targetKey.classList.add('highlight');
+                    }
+
+                    playSound('hint');
+                }
+            }, 5000);
         }
 
         function handleKeyPress(event) {
@@ -452,6 +584,7 @@
         function endGame() {
             gameActive = false;
             clearInterval(gameTimer);
+            if (hintTimer) clearTimeout(hintTimer);
             document.removeEventListener('keydown', handleKeyPress);
             showResult();
         }
@@ -527,12 +660,18 @@
                     gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
                     oscillator.start(audioContext.currentTime);
                     oscillator.stop(audioContext.currentTime + 0.2);
-                } else {
+                } else if (type === 'wrong') {
                     oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
                     gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
                     gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15);
                     oscillator.start(audioContext.currentTime);
                     oscillator.stop(audioContext.currentTime + 0.15);
+                } else if (type === 'hint') {
+                    oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+                    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + 0.3);
                 }
             } catch (e) {
                 console.log('Audio not supported');
